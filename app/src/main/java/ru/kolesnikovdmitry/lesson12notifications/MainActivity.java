@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setContentText("it is usual notify for test");
                 builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
                 builder.setSmallIcon(R.drawable.ic_notifications_usual_black_24dp);
-                builder.setContentIntent();
+                //builder.setContentIntent();
 
                 NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                 /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
