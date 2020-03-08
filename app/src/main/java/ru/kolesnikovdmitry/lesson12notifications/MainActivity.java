@@ -9,16 +9,20 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String CHANEL_USUAL_ID = "Usual Notify";                                   //ID канала оповещений
-    private final int NOTIFY_ID                 = 1001;
+    private final int    NOTIFY_ID              = 1001;
+    TextView             mTextViewActMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mTextViewActMain = findViewById(R.id.textViewMainAct);
     }
 
     public void onClickMainAct(View view) {
@@ -29,16 +33,23 @@ public class MainActivity extends AppCompatActivity {
                 builder.setContentText("it is usual notify for test");
                 builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
                 builder.setSmallIcon(R.drawable.ic_notifications_usual_black_24dp);
-                builder.setContentIntent();
+                //builder.setContentIntent();
 
-                NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-                /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
                     NotificationChannel notificationChannel = new NotificationChannel(CHANEL_USUAL_ID, CHANEL_USUAL_ID, NotificationManager.IMPORTANCE_DEFAULT);
                     assert notificationManager != null;
                     notificationManager.createNotificationChannel(notificationChannel);
-                }*/
-                assert notificationManager != null;
-                notificationManager.notify(NOTIFY_ID, builder.build());
+                    notificationManager.notify(NOTIFY_ID, builder.build());
+                    mTextViewActMain.setText(">=26 api");
+                }
+                else {
+                    NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(MainActivity.this);
+                    notificationManagerCompat.notify(NOTIFY_ID, builder.build());
+                    mTextViewActMain.setText("<26 api");
+                }
+
                 break;
             default:
                 break;
